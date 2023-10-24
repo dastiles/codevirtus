@@ -1,0 +1,16 @@
+<div class="shadow-xl w-full bg-white pb-5 mb-2">
+  <div>
+    <img [src]="company.imageUrl" alt="" />
+  </div>
+  <h1 class="text-lg font-bold text-gray-400 p-2">{{ company.name }}</h1>
+  <p class="text-sm text-gray-400 pb-2 px-2">{{ company.address }}</p>
+  <div class="text-sm text-gray-400 pb-2 px-2">
+    <p><span class="font-bold">Industry:</span> {{ company.industry }}</p>
+    <p>
+      <span class="font-bold">Phone Number:</span> {{ company.phoneNumber }}
+    </p>
+  </div>
+  <p class="text-[14px] text-gray-400 tracking-wide px-2">
+    {{ company.description }}
+  </p>
+</div>

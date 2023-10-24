@@ -1,0 +1,24 @@
+<nav class="bg-white shadow-xl w-full py-2 px-10 flex items-center gap-10">
+  <div class="">
+    <h1 class="text-xl text-gray-400 font-bold hidden md:block">
+      Company Register
+    </h1>
+    <h1 class="text-xl text-gray-400 font-bold md:hidden">CR</h1>
+  </div>
+
+  <div class="flex-1">
+    <form action="">
+      <div
+        class="lg:w-2/6 md:w-4/6 w-full border-gray-400 border-[1px] rounded-md p-1 bg-gray-200"
+      >
+        <input
+          type="text"
+          placeholder="Search Employees"
+          class="outline-none w-full bg-gray-200"
+        />
+      </div>
+    </form>
+  </div>
+
+  <a (click)="onLogout()" class="text-blue-700">login</a>
+</nav>
