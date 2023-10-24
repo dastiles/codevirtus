@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
   isRegistered: boolean = true;
   isLoggedTitle: string = 'Sign In';
 
-  activeTab: string = 'viewcompany';
+  activeTab: string = 'addcompany';
 
   companies: Array<any> = [];
   employees: Array<any> = [];
