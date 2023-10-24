@@ -11,7 +11,19 @@ export class AppComponent implements OnInit {
 
   constructor(private service: CompanyService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.service.getCompanies().subscribe({
+      next: (data: any) => {
+        this.companies = data;
+      },
+    });
+    this.service.getEmployees().subscribe({
+      next: (data: any) => {
+        console.log(data);
+        this.employees = data;
+      },
+    });
+  }
   isopen: boolean = false;
 
   onMobile() {
