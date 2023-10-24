@@ -5,7 +5,7 @@
       class="bg-[rgba(0,0,0,0.6)] h-[100vh] w-full flex items-center justify-center"
     >
       <div
-        class="h-5/6 lg:h-4/6 w-3/6 bg-white rounded-lg flex justify-center items-center flex-col"
+        class="h-5/6 lg:h-4/6 w-5/6 lg:w-3/6 bg-white rounded-lg flex justify-center items-center flex-col"
       >
         <h1 class="text-2xl font-bold text-gray-400">
           Welcome to Company Register
@@ -119,7 +119,7 @@
       </form>
     </div>
 
-    <a (click)="onLogout()" class="text-blue-700">Logout</a>
+    <a (click)="onLogout()" class="text-blue-700 hidden lg:block">Logout</a>
     <a href="#" class="lg:hidden" (click)="onMobile()">Menu</a>
 
     <div class="absolute inset-0 lg:hidden" *ngIf="isopen">
@@ -142,6 +142,12 @@
               class="text-gray-400 bg-transparent py-2 hover:text-blue-600 transition-all"
             >
               View Employers
+            </button>
+            <button
+              class="text-gray-400 bg-transparent py-2 hover:text-blue-600 transition-all"
+              (click)="onLogout()"
+            >
+              Logout
             </button>
           </div>
         </div>
