@@ -1,0 +1,18 @@
+<div class="shadow-xl w-full bg-white pb-5 mb-2">
+  <div>
+    <img [src]="employee.imageUrl" alt="" />
+  </div>
+  <h1 class="text-lg font-bold text-gray-400 p-2">{{ employee.name }}</h1>
+  <p class="text-sm text-gray-400 pb-2 px-2 font-bold">
+    {{ employee.jobTitle }}
+  </p>
+  <div class="text-sm text-gray-400 pb-2 px-2">
+    <p><span class="font-bold">Email:</span> {{ employee.email }}</p>
+    <p>
+      <span class="font-bold">Phone Number:</span> {{ employee.phoneNumber }}
+    </p>
+  </div>
+  <p class="text-[14px] text-gray-400 tracking-wide px-2">
+    {{ employee.jobDescription }}
+  </p>
+</div>

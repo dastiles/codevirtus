@@ -119,7 +119,9 @@
       </form>
     </div>
 
-    <a (click)="onLogout()" class="text-blue-700 hidden lg:block">Logout</a>
+    <a (click)="onLogout()" class="text-blue-700 hidden lg:block"
+      ><mat-icon>home</mat-icon></a
+    >
     <a href="#" class="lg:hidden" (click)="onMobile()">Menu</a>
 
     <div class="absolute inset-0 lg:hidden" *ngIf="isopen">
@@ -139,6 +141,7 @@
               View Companies
             </button>
             <button
+              (click)="onClick('viewemployees')"
               class="text-gray-400 bg-transparent py-2 hover:text-blue-600 transition-all"
             >
               View Employers
@@ -180,7 +183,7 @@
         </button>
       </div>
     </div>
-    <div class="w-5/6 overflow-x-auto">
+    <div class="w-5/6 overflow-x-auto bar">
       <div *ngIf="activeTab === 'addcompany'" class="p-10">
         <div class="">
           <h1 class="text-2xl font-bold text-gray-400">Add Company</h1>
@@ -294,6 +297,24 @@
               [company]="company"
             >
             </app-company-details>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="activeTab === 'viewemployees'" class="p-10">
+        <div class="">
+          <h1 class="text-2xl font-bold text-gray-400">View Employeess</h1>
+        </div>
+        <div class="bg-white shadow-lg w-full">
+          <h1 class="text-lg text-gray-400 px-5 py-10">
+            Employees Information
+          </h1>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 px-5">
+            <app-user-details
+              *ngFor="let employee of employees; index as i"
+              [employee]="employee"
+            >
+            </app-user-details>
           </div>
         </div>
       </div>

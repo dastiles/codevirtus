@@ -27,8 +27,13 @@ export class CompanyService {
     return this.http.get<any>(url, this.httpOptions);
   }
 
-  createCompany(data: any) {
-    let url = `${this.baseUrl}/company/all`;
+  getEmployees() {
+    let url = `${this.baseUrl}/employee/all`;
     return this.http.get<any>(url, this.httpOptions);
+  }
+
+  createCompany(data: any) {
+    let url = `${this.baseUrl}/company/add`;
+    return this.http.post<any>(url, data, this.httpOptions);
   }
 }

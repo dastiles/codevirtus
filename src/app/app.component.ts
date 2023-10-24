@@ -60,10 +60,11 @@ export class AppComponent implements OnInit {
         email: this.email,
         password: this.password,
       };
-      this.service.createUser(data).subscribe({
+      this.service.loginUser(data).subscribe({
         next: (data: any) => {
-          console.log(data[0]);
-          this.companies.push(data[0]);
+          console.log(data);
+          localStorage.setItem('token', data.access_token);
+          location.reload();
         },
       });
     }
@@ -87,15 +88,14 @@ export class AppComponent implements OnInit {
     if (this.activeTab === 'viewcompany') {
       this.service.getCompanies().subscribe({
         next: (data: any) => {
-          console.log(data);
           this.companies = data;
         },
       });
     } else if (this.activeTab === 'viewemployees') {
-      this.service.getCompanies().subscribe({
+      this.service.getEmployees().subscribe({
         next: (data: any) => {
           console.log(data);
-          this.employees.push(data);
+          this.employees = data;
         },
       });
     }
@@ -117,17 +117,17 @@ export class AppComponent implements OnInit {
       return;
     }
     let data = {
-      company_name: this.company_name,
-      company_address: this.company_address,
+      name: this.company_name,
+      address: this.company_address,
       date: this.date,
       industry: this.industry,
       description: this.description,
-      phone_number: this.phone_number,
-      image: this.image,
+      phoneNumber: this.phone_number,
+      imageUrl: this.image,
     };
     this.service.createCompany(data).subscribe({
       next: (data: any) => {
-        this.companies = data[0][0];
+        console.log(data);
       },
     });
   }
