@@ -11,6 +11,7 @@ import { CompanyService } from './services/api/company/company.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CompanyDetailsComponent } from './company-details/company-details.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { UserDetailsComponent } from './user-details/user-details.component';
     FormsModule,
     HttpClientModule,
     MatIconModule,
+    FontAwesomeModule,
   ],
   providers: [CompanyService, HttpClient],
   bootstrap: [AppComponent],

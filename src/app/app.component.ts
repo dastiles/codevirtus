@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CompanyService } from './services/api/company/company.service';
-
+import { faSignOut, faSearch } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,7 +9,40 @@ import { CompanyService } from './services/api/company/company.service';
 export class AppComponent implements OnInit {
   title: string = 'My Dashboard';
 
+  // icons
+  faSignOut = faSignOut;
+  faSearch = faSearch;
+
   constructor(private service: CompanyService) {}
+
+  // auth
+  firstname: string = '';
+  lastname: string = '';
+  email: string = '';
+  password: string = '';
+  itemsArray: number[] = Array(6).fill(0);
+  // add company forms
+  company_name: string = '';
+  company_address: string = '';
+  date: string = '';
+  industry: string = '';
+  description: string = '';
+  phone_number: string = '';
+  image: string = '';
+
+  // search
+  name = '';
+
+  isModal: boolean = localStorage.getItem('token') !== null ? true : false;
+  isRegistered: boolean = true;
+  isLoggedTitle: string = 'Sign In';
+
+  activeTab: string = 'addcompany';
+  activeClass: boolean = this.activeTab === 'addCompany';
+
+  companies: Array<any> = [];
+  employees: Array<any> = [];
+  searchedEmployees: Array<any> = [];
 
   ngOnInit(): void {
     this.service.getCompanies().subscribe({
@@ -29,29 +62,16 @@ export class AppComponent implements OnInit {
   onMobile() {
     this.isopen = !this.isopen;
   }
-  // auth
-  firstname: string = '';
-  lastname: string = '';
-  email: string = '';
-  password: string = '';
-  itemsArray: number[] = Array(6).fill(0);
-  // add company forms
-  company_name: string = '';
-  company_address: string = '';
-  date: string = '';
-  industry: string = '';
-  description: string = '';
-  phone_number: string = '';
-  image: string = '';
 
-  isModal: boolean = localStorage.getItem('token') !== null ? true : false;
-  isRegistered: boolean = true;
-  isLoggedTitle: string = 'Sign In';
+  getActiveClass(tab: string) {
+    this.activeClass = this.activeTab === tab;
 
-  activeTab: string = 'addcompany';
+    if (this.activeClass) {
+      return 'text-red-600 bg-transparent py-2 hover:text-gray-400 transition-all';
+    }
 
-  companies: Array<any> = [];
-  employees: Array<any> = [];
+    return 'text-gray-400 bg-transparent py-2 hover:text-blue-600 transition-all';
+  }
 
   onCreateAccount() {
     if (this.isLoggedTitle === 'Sign In') {
@@ -97,17 +117,11 @@ export class AppComponent implements OnInit {
   }
 
   onClick(active: string) {
-    if (this.activeTab === 'viewcompany') {
-      this.service.getCompanies().subscribe({
+    if (active === 'search') {
+      this.service.getSearchEmployees(this.name).subscribe({
         next: (data: any) => {
-          this.companies = data;
-        },
-      });
-    } else if (this.activeTab === 'viewemployees') {
-      this.service.getEmployees().subscribe({
-        next: (data: any) => {
-          console.log(data);
-          this.employees = data;
+          console.log(data[0]);
+          this.searchedEmployees = data;
         },
       });
     }
@@ -140,6 +154,8 @@ export class AppComponent implements OnInit {
     this.service.createCompany(data).subscribe({
       next: (data: any) => {
         console.log(data);
+        this.activeTab = 'viewcompany';
+        location.reload();
       },
     });
   }

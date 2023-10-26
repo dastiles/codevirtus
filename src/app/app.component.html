@@ -106,22 +106,30 @@
     </div>
 
     <div class="flex-1">
-      <form action="">
+      <form (submit)="onClick('search')">
         <div
-          class="lg:w-2/6 md:w-4/6 w-full border-gray-400 border-[1px] rounded-md p-1 bg-gray-200"
+          class="lg:w-2/6 md:w-4/6 w-full border-gray-400 border-[1px] rounded-md p-1 bg-gray-200 flex items-center"
         >
           <input
             type="text"
             placeholder="Search Employees"
             class="outline-none w-full bg-gray-200"
+            [(ngModel)]="name"
+            name="name"
           />
+          <button type="submit" class="text-blue-700 hover:text-gray-400">
+            <fa-icon
+              [icon]="faSearch"
+              class="text-xl text-blue-700 hover:text-gray-400"
+            ></fa-icon>
+          </button>
         </div>
       </form>
     </div>
 
-    <a (click)="onLogout()" class="text-blue-700 hidden lg:block"
-      ><mat-icon>home</mat-icon></a
-    >
+    <a (click)="onLogout()" class="text-blue-700 hidden lg:block text-xl"
+      ><fa-icon [icon]="faSignOut"></fa-icon
+    ></a>
     <a href="#" class="lg:hidden" (click)="onMobile()">Menu</a>
 
     <div class="absolute inset-0 lg:hidden" *ngIf="isopen">
@@ -165,19 +173,19 @@
       <div class="flex flex-col gap-5 py-10">
         <button
           (click)="onClick('addcompany')"
-          class="text-gray-400 bg-transparent py-2 hover:text-blue-600 transition-all"
+          [ngClass]="getActiveClass('addcompany')"
         >
           Add Company
         </button>
         <button
           (click)="onClick('viewcompany')"
-          class="text-gray-400 bg-transparent py-2 hover:text-blue-600 transition-all"
+          [ngClass]="getActiveClass('viewcompany')"
         >
           View Companies
         </button>
         <button
           (click)="onClick('viewemployees')"
-          class="text-gray-400 bg-transparent py-2 hover:text-blue-600 transition-all"
+          [ngClass]="getActiveClass('viewemployees')"
         >
           View Employers
         </button>
@@ -312,6 +320,24 @@
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 px-5">
             <app-user-details
               *ngFor="let employee of employees; index as i"
+              [employee]="employee"
+            >
+            </app-user-details>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="activeTab === 'search'" class="p-10">
+        <div class="">
+          <h1 class="text-2xl font-bold text-gray-400">View Employeess</h1>
+        </div>
+        <div class="bg-white shadow-lg w-full">
+          <h1 class="text-lg text-gray-400 px-5 py-10">
+            Employees Information
+          </h1>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 px-5">
+            <app-user-details
+              *ngFor="let employee of searchedEmployees; index as i"
               [employee]="employee"
             >
             </app-user-details>

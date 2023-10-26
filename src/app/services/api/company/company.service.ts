@@ -36,4 +36,9 @@ export class CompanyService {
     let url = `${this.baseUrl}/company/add`;
     return this.http.post<any>(url, data, this.httpOptions);
   }
+
+  getSearchEmployees(data: any) {
+    let url = `${this.baseUrl}/employee/search?name=${data}`;
+    return this.http.get<any>(url, this.httpOptions);
+  }
 }
