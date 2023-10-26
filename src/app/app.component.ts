@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CompanyService } from './services/api/company/company.service';
-import { faSignOut, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSignOut, faSearch, faBars } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
   // icons
   faSignOut = faSignOut;
   faSearch = faSearch;
+  faBars = faBars;
 
   constructor(private service: CompanyService) {}
 

@@ -97,7 +97,9 @@
 
   <!-- nav bar -->
 
-  <nav class="bg-white shadow-xl w-full py-2 px-10 flex items-center gap-10">
+  <nav
+    class="bg-white shadow-xl w-full py-2 lg:px-10 px-5 flex items-center gap-4 lg:gap-10"
+  >
     <div class="">
       <h1 class="text-xl text-gray-400 font-bold hidden md:block">
         Company Register
@@ -130,7 +132,9 @@
     <a (click)="onLogout()" class="text-blue-700 hidden lg:block text-xl"
       ><fa-icon [icon]="faSignOut"></fa-icon
     ></a>
-    <a href="#" class="lg:hidden" (click)="onMobile()">Menu</a>
+    <a href="#" class="lg:hidden text-blue-700 text-xl" (click)="onMobile()"
+      ><fa-icon [icon]="faBars"></fa-icon
+    ></a>
 
     <div class="absolute inset-0 lg:hidden" *ngIf="isopen">
       <div class="bg-[rgba(0,0,0,0.6)] h-[100vh] flex">
@@ -138,27 +142,27 @@
           <div class="flex flex-col gap-5 py-10">
             <button
               (click)="onClick('addcompany')"
-              class="text-gray-400 bg-transparent py-2 hover:text-blue-600 transition-all"
+              [ngClass]="getActiveClass('addcompany')"
             >
               Add Company
             </button>
             <button
               (click)="onClick('viewcompany')"
-              class="text-gray-400 bg-transparent py-2 hover:text-blue-600 transition-all"
+              [ngClass]="getActiveClass('viewcompany')"
             >
               View Companies
             </button>
             <button
               (click)="onClick('viewemployees')"
-              class="text-gray-400 bg-transparent py-2 hover:text-blue-600 transition-all"
+              [ngClass]="getActiveClass('viewemployees')"
             >
               View Employers
             </button>
             <button
-              class="text-gray-400 bg-transparent py-2 hover:text-blue-600 transition-all"
+              class="text-gray-400 text-xl bg-transparent py-2 hover:text-blue-600 transition-all"
               (click)="onLogout()"
             >
-              Logout
+              <fa-icon [icon]="faSignOut"></fa-icon>
             </button>
           </div>
         </div>
@@ -191,7 +195,7 @@
         </button>
       </div>
     </div>
-    <div class="w-5/6 overflow-x-auto bar">
+    <div class="w-full overflow-x-auto bar">
       <div *ngIf="activeTab === 'addcompany'" class="p-10">
         <div class="">
           <h1 class="text-2xl font-bold text-gray-400">Add Company</h1>
