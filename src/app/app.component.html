@@ -196,7 +196,7 @@
       </div>
     </div>
     <div class="w-full overflow-x-auto bar">
-      <div *ngIf="activeTab === 'addcompany'" class="p-10">
+      <div *ngIf="activeTab === 'addcompany'" class="lg:p-10 p-4">
         <div class="">
           <h1 class="text-2xl font-bold text-gray-400">Add Company</h1>
         </div>
@@ -296,7 +296,7 @@
         </div>
       </div>
       <!-- Card section -->
-      <div *ngIf="activeTab === 'viewcompany'" class="p-10">
+      <div *ngIf="activeTab === 'viewcompany'" class="lg:p-10 p-4">
         <div class="">
           <h1 class="text-2xl font-bold text-gray-400">View Companies</h1>
         </div>
@@ -312,7 +312,7 @@
           </div>
         </div>
       </div>
-      <div *ngIf="activeTab === 'viewemployees'" class="p-10">
+      <div *ngIf="activeTab === 'viewemployees'" class="lg:p-10 p-4">
         <div class="">
           <h1 class="text-2xl font-bold text-gray-400">View Employeess</h1>
         </div>
@@ -330,14 +330,12 @@
           </div>
         </div>
       </div>
-      <div *ngIf="activeTab === 'search'" class="p-10">
+      <div *ngIf="activeTab === 'search'" class="lg:p-10 p-4">
         <div class="">
           <h1 class="text-2xl font-bold text-gray-400">View Employeess</h1>
         </div>
         <div class="bg-white shadow-lg w-full">
-          <h1 class="text-lg text-gray-400 px-5 py-10">
-            Employees Information
-          </h1>
+          <h1 class="text-lg text-gray-400 px-5 py-10">Employe Information</h1>
 
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 px-5">
             <app-user-details

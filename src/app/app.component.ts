@@ -68,7 +68,7 @@ export class AppComponent implements OnInit {
     this.activeClass = this.activeTab === tab;
 
     if (this.activeClass) {
-      return 'text-red-600 bg-transparent py-2 hover:text-gray-400 transition-all';
+      return 'text-blue-600 bg-transparent py-2 hover:text-gray-400 transition-all';
     }
 
     return 'text-gray-400 bg-transparent py-2 hover:text-blue-600 transition-all';
