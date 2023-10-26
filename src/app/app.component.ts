@@ -118,16 +118,17 @@ export class AppComponent implements OnInit {
   }
 
   onClick(active: string) {
-    if (active === 'search') {
-      this.service.getSearchEmployees(this.name).subscribe({
-        next: (data: any) => {
-          console.log(data[0]);
-          this.searchedEmployees = data;
-        },
-      });
-    }
     this.activeTab = active;
     this.isopen = !this.isopen;
+  }
+  onNameSearch(active: string) {
+    this.service.getSearchEmployees(this.name).subscribe({
+      next: (data: any) => {
+        console.log(data[0]);
+        this.searchedEmployees = data;
+      },
+    });
+    this.activeTab = active;
   }
 
   onCompanySubmit() {
