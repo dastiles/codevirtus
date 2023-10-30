@@ -19,21 +19,15 @@
         </div>
 
         <h1
-          class="text-2xl font-bold text-gray-400 hidden lg:block"
+          class="text-2xl font-bold text-black hidden lg:block"
           *ngIf="!isLoading"
         >
           Welcome to Company Register
         </h1>
-        <h1
-          class="text-2xl font-bold text-gray-400 lg:hidden"
-          *ngIf="!isLoading"
-        >
+        <h1 class="text-2xl font-bold text-black lg:hidden" *ngIf="!isLoading">
           Welcome to CR
         </h1>
-        <h1
-          class="text-lg text-gray-400 px-5 py-5 font-bold"
-          *ngIf="!isLoading"
-        >
+        <h1 class="text-lg text-black px-5 py-5 font-bold" *ngIf="!isLoading">
           {{ isLoggedTitle }}
         </h1>
         <div class="w-full" *ngIf="!isLoading">
@@ -127,10 +121,10 @@
     class="bg-white shadow-xl w-full py-4 lg:px-10 px-5 flex items-center gap-4 lg:gap-10"
   >
     <div class="">
-      <h1 class="text-xl text-gray-400 font-bold hidden md:block">
+      <h1 class="text-xl text-black font-bold hidden md:block">
         Company Register
       </h1>
-      <h1 class="text-xl text-gray-400 font-bold md:hidden">CR</h1>
+      <h1 class="text-xl text-black font-bold md:hidden">CR</h1>
     </div>
 
     <div class="flex-1">
@@ -186,7 +180,7 @@
               View Employers
             </button>
             <button
-              class="text-gray-400 text-xl bg-transparent py-2 hover:text-blue-600 transition-all"
+              class="text-blue-700 text-xl bg-transparent py-2 hover:text-blue-600 transition-all"
               (click)="onLogout()"
             >
               <fa-icon [icon]="faSignOut"></fa-icon>
@@ -239,10 +233,10 @@
         [@fadeIn]
       >
         <div class="">
-          <h1 class="text-2xl font-bold text-gray-400">Add Company</h1>
+          <h1 class="text-2xl font-bold text-black">Add Company</h1>
         </div>
         <div class="bg-white shadow-lg w-full">
-          <h1 class="text-lg text-gray-400 px-5 py-10">Company Details</h1>
+          <h1 class="text-lg text-black px-5 py-10">Company Details</h1>
 
           <form
             (submit)="onCompanySubmit()"
@@ -351,10 +345,10 @@
         [@fadeIn]
       >
         <div class="">
-          <h1 class="text-2xl font-bold text-gray-400">View Companies</h1>
+          <h1 class="text-2xl font-bold text-black">View Companies</h1>
         </div>
         <div class="bg-white w-full">
-          <h1 class="text-lg text-gray-400 px-5 py-10">Company Information</h1>
+          <h1 class="text-lg text-black px-5 py-10">Company Information</h1>
 
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 px-5">
             <app-company-details
@@ -373,12 +367,10 @@
         [@fadeIn]
       >
         <div class="">
-          <h1 class="text-2xl font-bold text-gray-400">View Employeess</h1>
+          <h1 class="text-2xl font-bold text-black">View Employeess</h1>
         </div>
         <div class="bg-white shadow-lg w-full">
-          <h1 class="text-lg text-gray-400 px-5 py-10">
-            Employees Information
-          </h1>
+          <h1 class="text-lg text-black px-5 py-10">Employees Information</h1>
 
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 px-5">
             <app-user-details
@@ -392,12 +384,12 @@
       </div>
       <div *ngIf="activeTab === 'search'" class="lg:p-10 p-4" [@fadeIn]>
         <div class="">
-          <h1 class="text-2xl font-bold text-gray-400">
+          <h1 class="text-2xl font-bold text-black">
             Results ({{ searchedEmployees.length }})
           </h1>
         </div>
         <div class="bg-white shadow-lg w-full">
-          <h1 class="text-lg text-gray-400 px-5 py-10">Employee Information</h1>
+          <h1 class="text-lg text-black px-5 py-10">Employee Information</h1>
 
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 px-5">
             <app-user-details

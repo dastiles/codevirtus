@@ -102,10 +102,10 @@ export class AppComponent implements OnInit {
     this.activeClass = this.activeTab === tab;
 
     if (this.activeClass) {
-      return 'text-blue-600 bg-transparent py-2 hover:text-gray-400 transition-all';
+      return 'text-blue-600 bg-transparent py-2 hover:text-black transition-all';
     }
 
-    return 'text-gray-400 bg-transparent py-2 hover:text-blue-600 transition-all';
+    return 'text-black bg-transparent py-2 hover:text-blue-600 transition-all';
   }
 
   onCreateAccount() {
@@ -150,15 +150,31 @@ export class AppComponent implements OnInit {
         },
       });
     } else {
+      if (!this.email || !this.password) {
+        this.service.showAlert('Please fill in all inputs', 'alert-error');
+        this.isLoading = false;
+        return;
+      }
+      if (!emailRegex.test(this.email)) {
+        this.service.showAlert('Invalid Email', 'alert-error');
+        this.isLoading = false;
+        return;
+      }
+
       let data = {
         email: this.email,
         password: this.password,
       };
+
       this.service.loginUser(data).subscribe({
         next: (data: any) => {
           console.log(data);
+          this.service.showAlert('Successfully Logged', 'alert-success');
           localStorage.setItem('token', data.access_token);
           location.reload();
+        },
+        error: (error) => {
+          this.service.showAlert('Something went wrong', 'alert-error');
         },
       });
     }
@@ -176,6 +192,7 @@ export class AppComponent implements OnInit {
 
   onLogout() {
     localStorage.removeItem('token');
+    this.service.showAlert('You have successfully logged out', '');
     location.reload();
   }
 
