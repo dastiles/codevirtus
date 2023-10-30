@@ -7,13 +7,26 @@
       <div
         class="h-5/6 lg:h-4/6 w-5/6 lg:w-3/6 bg-white rounded-lg flex justify-center items-center flex-col"
       >
-        <h1 class="text-2xl font-bold text-gray-400">
+        <div
+          *ngIf="isLoading"
+          class="h-full w-full flex justify-center items-center flex-col"
+        >
+          <mat-progress-spinner
+            *ngIf="isLoading"
+            mode="indeterminate"
+          ></mat-progress-spinner>
+        </div>
+
+        <h1 class="text-2xl font-bold text-gray-400" *ngIf="!isLoading">
           Welcome to Company Register
         </h1>
-        <h1 class="text-lg text-gray-400 px-5 py-5 font-bold">
+        <h1
+          class="text-lg text-gray-400 px-5 py-5 font-bold"
+          *ngIf="!isLoading"
+        >
           {{ isLoggedTitle }}
         </h1>
-        <div class="w-full">
+        <div class="w-full" *ngIf="!isLoading">
           <form
             (submit)="onCreateAccount()"
             class="px-5 flex flex-wrap gap-x-20"
@@ -74,7 +87,7 @@
             </div>
           </form>
         </div>
-        <p *ngIf="isRegistered">
+        <p *ngIf="isRegistered && !isLoading">
           Already have an
           <span
             class="text-blue-500 cursor-pointer"
@@ -196,7 +209,17 @@
       </div>
     </div>
     <div class="w-full overflow-x-auto bar">
-      <div *ngIf="activeTab === 'addcompany'" class="lg:p-10 p-4">
+      <div
+        *ngIf="isLoading && isModal"
+        class="lg:p-10 p-4 bg-white shadow-lg w-full flex items-center justify-center h-full"
+      >
+        <mat-progress-spinner
+          *ngIf="isLoading"
+          mode="indeterminate"
+        ></mat-progress-spinner>
+      </div>
+
+      <div *ngIf="activeTab === 'addcompany' && !isLoading" class="lg:p-10 p-4">
         <div class="">
           <h1 class="text-2xl font-bold text-gray-400">Add Company</h1>
         </div>
@@ -332,10 +355,12 @@
       </div>
       <div *ngIf="activeTab === 'search'" class="lg:p-10 p-4">
         <div class="">
-          <h1 class="text-2xl font-bold text-gray-400">View Employeess</h1>
+          <h1 class="text-2xl font-bold text-gray-400">
+            Results ({{ searchedEmployees.length }})
+          </h1>
         </div>
         <div class="bg-white shadow-lg w-full">
-          <h1 class="text-lg text-gray-400 px-5 py-10">Employe Information</h1>
+          <h1 class="text-lg text-gray-400 px-5 py-10">Employee Information</h1>
 
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 px-5">
             <app-user-details

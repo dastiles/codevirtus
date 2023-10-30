@@ -40,6 +40,7 @@ export class AppComponent implements OnInit {
 
   activeTab: string = 'addcompany';
   activeClass: boolean = this.activeTab === 'addCompany';
+  isLoading: boolean = false;
 
   companies: Array<any> = [];
   employees: Array<any> = [];
@@ -75,7 +76,25 @@ export class AppComponent implements OnInit {
   }
 
   onCreateAccount() {
+    this.isLoading = true;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (this.isLoggedTitle === 'Sign In') {
+      if (!this.firstname || !this.lastname || !this.email || !this.password) {
+        this.service.showAlert('Please fill in all inputs', 'alert-error');
+        this.isLoading = false;
+        return;
+      }
+      if (!emailRegex.test(this.email)) {
+        this.service.showAlert('Invalid Email', 'alert-error');
+        this.isLoading = false;
+        return;
+      }
+
+      if (this.password.length < 6) {
+        this.service.showAlert('Password too short', 'alert-error');
+        this.isLoading = false;
+        return;
+      }
       let data = {
         firstname: this.firstname,
         lastname: this.lastname,
@@ -84,8 +103,17 @@ export class AppComponent implements OnInit {
       };
       this.service.createUser(data).subscribe({
         next: (data: any) => {
+          this.service.showAlert('Successfully Logged', 'alert-success');
           localStorage.setItem('token', data.access_token);
           location.reload();
+        },
+        error: (error) => {
+          console.log(error);
+          if (error.status === 403) {
+            this.service.showAlert('Email Already registered', 'alert-error');
+          } else {
+            this.service.showAlert('Something went wrong', 'alert-error');
+          }
         },
       });
     } else {
@@ -101,6 +129,7 @@ export class AppComponent implements OnInit {
         },
       });
     }
+    this.isLoading = false;
   }
 
   handleIsRegistered() {
@@ -122,16 +151,26 @@ export class AppComponent implements OnInit {
     this.isopen = !this.isopen;
   }
   onNameSearch(active: string) {
+    if (active === '') {
+      this.service.showAlert('PLease Fill in a name', 'alert-error');
+      this.isLoading = false;
+      return;
+    }
     this.service.getSearchEmployees(this.name).subscribe({
       next: (data: any) => {
         console.log(data[0]);
         this.searchedEmployees = data;
+      },
+      error: (error) => {
+        console.log(error);
+        this.service.showAlert('Something went wrong', 'alert-error');
       },
     });
     this.activeTab = active;
   }
 
   onCompanySubmit() {
+    this.isLoading = true;
     if (
       !this.company_name ||
       !this.company_address ||
@@ -141,7 +180,8 @@ export class AppComponent implements OnInit {
       !this.phone_number ||
       !this.image
     ) {
-      alert('please fill in the inputs');
+      this.service.showAlert('PLease Fill in all inputs', 'alert-error');
+      this.isLoading = false;
       return;
     }
     let data = {
@@ -159,7 +199,14 @@ export class AppComponent implements OnInit {
         this.activeTab = 'viewcompany';
         location.reload();
       },
+      error: (error) => {
+        console.log(error);
+
+        this.service.showAlert('Something went wrong', 'alert-error');
+      },
     });
+
+    this.isLoading = false;
   }
 
   getCompanies() {}

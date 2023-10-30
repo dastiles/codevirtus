@@ -1,18 +1,26 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CompanyService {
   private baseUrl: string = 'https://apidev2.codevirtus.com/api';
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) {}
 
   httpOptions = {
     headers: new HttpHeaders({
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     }),
   };
+
+  showAlert(message: string, resultType: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000,
+      panelClass: [resultType],
+    });
+  }
   createUser(data: any) {
     let url = `${this.baseUrl}/v1/auth/register`;
     return this.http.post<any>(url, data);
