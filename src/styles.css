@@ -25,3 +25,9 @@ body {
   background-color: orange;
   color: white;
 }
+
+.custom-input {
+  border: none; /* Remove the border */
+  background-color: transparent; /* Set the background color to transparent */
+  /* Add any other custom styles as needed */
+}

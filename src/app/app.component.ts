@@ -1,10 +1,43 @@
 import { Component, OnInit } from '@angular/core';
 import { CompanyService } from './services/api/company/company.service';
 import { faSignOut, faSearch, faBars } from '@fortawesome/free-solid-svg-icons';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+  query,
+  stagger,
+} from '@angular/animations';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+  animations: [
+    trigger('stagger', [
+      transition('* => *', [
+        query(':enter', style({ opacity: 0 }), { optional: true }),
+        query(
+          ':enter',
+          stagger('200ms', [animate('500ms', style({ opacity: 1 }))]),
+          { optional: true }
+        ),
+      ]),
+    ]),
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('500ms', style({ opacity: 1 })),
+      ]),
+    ]),
+    trigger('inputAnimation', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(-10px)' }),
+        animate('500ms', style({ opacity: 1, transform: 'translateY(0)' })),
+      ]),
+    ]),
+  ],
 })
 export class AppComponent implements OnInit {
   title: string = 'My Dashboard';
@@ -171,6 +204,7 @@ export class AppComponent implements OnInit {
 
   onCompanySubmit() {
     this.isLoading = true;
+    const regex = /^07\d{8}$/;
     if (
       !this.company_name ||
       !this.company_address ||
@@ -181,6 +215,12 @@ export class AppComponent implements OnInit {
       !this.image
     ) {
       this.service.showAlert('PLease Fill in all inputs', 'alert-error');
+      this.isLoading = false;
+      return;
+    }
+
+    if (!regex.test(this.phone_number)) {
+      this.service.showAlert('Invalid phone number format ', 'alert-error');
       this.isLoading = false;
       return;
     }

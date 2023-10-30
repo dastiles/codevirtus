@@ -17,7 +17,11 @@
           ></mat-progress-spinner>
         </div>
 
-        <h1 class="text-2xl font-bold text-gray-400" *ngIf="!isLoading">
+        <h1
+          class="text-2xl font-bold text-gray-400"
+          *ngIf="!isLoading"
+          [@fadeIn]
+        >
           Welcome to Company Register
         </h1>
         <h1
@@ -34,6 +38,7 @@
             <div
               *ngIf="isRegistered"
               class="w-full lg:w-5/12 border-gray-400 border-[1px] rounded-md p-1 bg-gray-200 my-5"
+              [@inputAnimation]
             >
               <input
                 type="text"
@@ -57,6 +62,7 @@
             </div>
             <div
               class="w-full lg:w-5/12 border-gray-400 border-[1px] rounded-md p-1 bg-gray-200 my-5"
+              [@inputAnimation]
             >
               <input
                 type="text"
@@ -68,6 +74,7 @@
             </div>
             <div
               class="w-full lg:w-5/12 border-gray-400 border-[1px] rounded-md p-1 bg-gray-200 my-5"
+              [@inputAnimation]
             >
               <input
                 type="password"
@@ -111,7 +118,7 @@
   <!-- nav bar -->
 
   <nav
-    class="bg-white shadow-xl w-full py-2 lg:px-10 px-5 flex items-center gap-4 lg:gap-10"
+    class="bg-white shadow-xl w-full py-4 lg:px-10 px-5 flex items-center gap-4 lg:gap-10"
   >
     <div class="">
       <h1 class="text-xl text-gray-400 font-bold hidden md:block">
@@ -124,6 +131,7 @@
       <form (submit)="onNameSearch('search')">
         <div
           class="lg:w-2/6 md:w-4/6 w-full border-gray-400 border-[1px] rounded-md p-1 bg-gray-200 flex items-center"
+          [@inputAnimation]
         >
           <input
             type="text"
@@ -149,7 +157,7 @@
       ><fa-icon [icon]="faBars"></fa-icon
     ></a>
 
-    <div class="absolute inset-0 lg:hidden" *ngIf="isopen">
+    <div class="absolute inset-0 lg:hidden" *ngIf="isopen" [@fadeIn]>
       <div class="bg-[rgba(0,0,0,0.6)] h-[100vh] flex">
         <div class="w-4/6 shadow-xl bg-white h-full">
           <div class="flex flex-col gap-5 py-10">
@@ -219,7 +227,11 @@
         ></mat-progress-spinner>
       </div>
 
-      <div *ngIf="activeTab === 'addcompany' && !isLoading" class="lg:p-10 p-4">
+      <div
+        *ngIf="activeTab === 'addcompany' && !isLoading"
+        class="lg:p-10 p-4"
+        [@fadeIn]
+      >
         <div class="">
           <h1 class="text-2xl font-bold text-gray-400">Add Company</h1>
         </div>
@@ -232,6 +244,7 @@
           >
             <div
               class="w-full lg:w-5/12 border-gray-400 border-[1px] rounded-md p-1 bg-gray-200 my-5"
+              [@inputAnimation]
             >
               <input
                 type="text"
@@ -243,6 +256,7 @@
             </div>
             <div
               class="w-full lg:w-5/12 border-gray-400 border-[1px] rounded-md p-1 bg-gray-200 my-5"
+              [@inputAnimation]
             >
               <input
                 type="text"
@@ -254,17 +268,19 @@
             </div>
             <div
               class="w-full lg:w-5/12 border-gray-400 border-[1px] rounded-md p-1 bg-gray-200 my-5"
+              [@inputAnimation]
             >
               <input
-                type="text"
+                matInput
                 placeholder="Company Date*"
-                class="outline-none w-full bg-gray-200 p-1"
+                class="outline-none w-full bg-gray-200 p-1 custom-input"
                 [(ngModel)]="date"
                 name="date"
               />
             </div>
             <div
               class="w-full lg:w-5/12 border-gray-400 border-[1px] rounded-md p-1 bg-gray-200 my-5"
+              [@inputAnimation]
             >
               <input
                 type="text"
@@ -276,6 +292,7 @@
             </div>
             <div
               class="w-full lg:w-5/12 border-gray-400 border-[1px] rounded-md p-1 bg-gray-200 my-5"
+              [@inputAnimation]
             >
               <input
                 type="text"
@@ -287,6 +304,7 @@
             </div>
             <div
               class="w-full lg:w-5/12 border-gray-400 border-[1px] rounded-md p-1 bg-gray-200 my-5"
+              [@inputAnimation]
             >
               <input
                 type="number"
@@ -298,6 +316,7 @@
             </div>
             <div
               class="w-full lg:w-5/12 border-gray-400 border-[1px] rounded-md p-1 bg-gray-200 my-5"
+              [@inputAnimation]
             >
               <input
                 type="text"
@@ -319,23 +338,34 @@
         </div>
       </div>
       <!-- Card section -->
-      <div *ngIf="activeTab === 'viewcompany'" class="lg:p-10 p-4">
+      <div
+        *ngIf="activeTab === 'viewcompany'"
+        class="lg:p-10 p-4"
+        [@stagger]="companies.length"
+        [@fadeIn]
+      >
         <div class="">
           <h1 class="text-2xl font-bold text-gray-400">View Companies</h1>
         </div>
-        <div class="bg-white shadow-lg w-full">
+        <div class="bg-white w-full">
           <h1 class="text-lg text-gray-400 px-5 py-10">Company Information</h1>
 
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 px-5">
             <app-company-details
               *ngFor="let company of companies; index as i"
               [company]="company"
+              [@stagger]
             >
             </app-company-details>
           </div>
         </div>
       </div>
-      <div *ngIf="activeTab === 'viewemployees'" class="lg:p-10 p-4">
+      <div
+        *ngIf="activeTab === 'viewemployees'"
+        class="lg:p-10 p-4"
+        [@stagger]="employees.length"
+        [@fadeIn]
+      >
         <div class="">
           <h1 class="text-2xl font-bold text-gray-400">View Employeess</h1>
         </div>
@@ -348,12 +378,13 @@
             <app-user-details
               *ngFor="let employee of employees; index as i"
               [employee]="employee"
+              [@stagger]
             >
             </app-user-details>
           </div>
         </div>
       </div>
-      <div *ngIf="activeTab === 'search'" class="lg:p-10 p-4">
+      <div *ngIf="activeTab === 'search'" class="lg:p-10 p-4" [@fadeIn]>
         <div class="">
           <h1 class="text-2xl font-bold text-gray-400">
             Results ({{ searchedEmployees.length }})
